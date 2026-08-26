@@ -5,7 +5,7 @@ export const resumeData = {
   location: "Pune, India",
   email: "jadhavkedar55@gmail.com",
   phone: "+91-7020059280",
-  linkedin: "https://linkedin.com/in/kedar-jadhav",
+  linkedin: "https://www.linkedin.com/in/kedar-jadhav-190090317/",
   github: "https://github.com/KedarJ10-design",
   twitter: "",
   resumePdf: "/MARK_V_v2.pdf",
