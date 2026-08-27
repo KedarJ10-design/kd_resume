@@ -143,13 +143,13 @@ export function Projects() {
           >
             <TiltCard className="relative h-full">
             <SpotlightCard className="h-full flex flex-col group overflow-hidden" padding="none">
-              <div className="h-48 bg-bg-elevated flex items-center justify-center border-b border-border/30 relative overflow-hidden">
+              <div className="h-48 bg-bg-elevated flex items-center justify-center border-b border-border/40 group-hover:border-warm/50 transition-all duration-700 relative overflow-hidden group-hover:scale-[1.02]">
                  <div className="absolute inset-0 bg-grid-tactile opacity-30" />
-                 {/* Subtle accent color glow */}
+                 {/* Warm color glow (Orange in light, Purple in dark) */}
                  <div
-                   className="absolute inset-0 opacity-10"
+                   className="absolute inset-0 opacity-10 dark:opacity-20 group-hover:opacity-40 dark:group-hover:opacity-50 transition-opacity duration-500"
                    style={{
-                     background: `radial-gradient(circle at 50% 50%, ${project.accentColor}40, transparent 70%)`,
+                     background: `radial-gradient(circle at 50% 50%, var(--color-warm), transparent 70%)`,
                    }}
                  />
                  <Globe size={32} className="text-text-muted relative z-10" strokeWidth={1} />

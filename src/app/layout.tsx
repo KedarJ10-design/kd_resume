@@ -100,7 +100,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased bg-bg text-text">
+      <body className="font-sans antialiased bg-bg text-text" suppressHydrationWarning>
         <CustomCursor />
         {children}
       </body>

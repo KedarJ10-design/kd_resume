@@ -31,6 +31,8 @@
   --color-warm: #D99C48;
   /* Ochre */
   --color-warm-dim: rgba(217, 156, 72, 0.12);
+
+  --color-card-glow: #f97316; /* Bright orange for card top edge */
 }
 
 @layer base {
@@ -63,6 +65,8 @@
     --color-warm: #C084FC;
     /* Bright Amethyst */
     --color-warm-dim: rgba(192, 132, 252, 0.12);
+
+    --color-card-glow: #ffffff; /* Silver/White for card top edge */
 
     color-scheme: dark;
   }

@@ -34,8 +34,11 @@ export function SpotlightCard({
       )}
       {...props}
     >
-      {/* Soft inner glow on top edge to simulate physical lighting */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
+      {/* Soft inner glow on top edge: Orange in light, Silver in dark */}
+      <div 
+        className="absolute inset-x-0 top-0 h-[2px] opacity-80" 
+        style={{ backgroundImage: 'linear-gradient(to right, transparent, var(--color-card-glow, white), transparent)' }} 
+      />
       
       {/* Content wrapper */}
       <div className="relative z-10 h-full flex flex-col">

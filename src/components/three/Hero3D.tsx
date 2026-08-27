@@ -22,31 +22,46 @@ function useTheme() {
   return isDark;
 }
 
-/* ─── Morphing Icosphere with noise displacement ─── */
-function MorphingSculpture({ isDark }: { isDark: boolean }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const originalPositions = useRef<Float32Array | null>(null);
-  
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    if (meshRef.current) {
-      const geo = meshRef.current.geometry;
-      originalPositions.current = new Float32Array(geo.attributes.position.array);
+    // Default to false for SSR, then update
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth < 768);
+      const handleResize = () => setIsMobile(window.innerWidth < 768);
+      window.addEventListener("resize", handleResize, { passive: true });
+      return () => window.removeEventListener("resize", handleResize);
     }
   }, []);
+  return isMobile;
+}
+
+/* ─── Morphing Icosphere with noise displacement ─── */
+function MorphingSculpture({ isDark, isMobile }: { isDark: boolean; isMobile: boolean }) {
+  const meshRef = useRef<THREE.Mesh>(null);
+  
+  // Explicitly create and own the geometry in useMemo to prevent any lifecycle mismatch
+  const { geometry, originalPositions } = useMemo(() => {
+    const geo = new THREE.IcosahedronGeometry(2, isMobile ? 2 : 3);
+    const original = new Float32Array(geo.attributes.position.array);
+    return { geometry: geo, originalPositions: original };
+  }, [isMobile]);
 
   useFrame((state) => {
-    if (!meshRef.current || !originalPositions.current) return;
+    if (!meshRef.current) return;
     
+    const positions = geometry.attributes.position.array as Float32Array;
+    
+    // Safety check
+    if (positions.length !== originalPositions.length) return;
+
     const t = state.clock.elapsedTime;
-    const geo = meshRef.current.geometry;
-    const positions = geo.attributes.position.array as Float32Array;
-    const original = originalPositions.current;
     
     // Vertex displacement — organic morphing effect
     for (let i = 0; i < positions.length; i += 3) {
-      const ox = original[i];
-      const oy = original[i + 1];
-      const oz = original[i + 2];
+      const ox = originalPositions[i];
+      const oy = originalPositions[i + 1];
+      const oz = originalPositions[i + 2];
       
       // Simplex-like noise using sin combinations
       const noise = 
@@ -65,8 +80,8 @@ function MorphingSculpture({ isDark }: { isDark: boolean }) {
       positions[i + 2] = oz + nz * noise;
     }
     
-    geo.attributes.position.needsUpdate = true;
-    geo.computeVertexNormals();
+    geometry.attributes.position.needsUpdate = true;
+    geometry.computeVertexNormals();
     
     // Smooth rotation tracking pointer
     const targetRotationX = Math.sin(t * 0.15) * 0.4 + (state.pointer.y * 0.6);
@@ -75,18 +90,19 @@ function MorphingSculpture({ isDark }: { isDark: boolean }) {
     meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotationX, 0.08);
     meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotationY, 0.08);
     
-    // Gentle breathing scale
-    const scale = 1 + Math.sin(t * 0.3) * 0.03;
+    // Gentle breathing scale (smaller on mobile)
+    const baseScale = isMobile ? 0.65 : 1;
+    const scale = baseScale + Math.sin(t * 0.3) * 0.03;
     meshRef.current.scale.set(scale, scale, scale);
   });
 
   return (
-    <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
-      <mesh ref={meshRef} position={[0, 0, 0]}>
-        <icosahedronGeometry args={[2, 3]} />
+    <Float speed={isMobile ? 1 : 1.5} rotationIntensity={0.3} floatIntensity={0.8}>
+      <mesh ref={meshRef} position={[0, 0, 0]} geometry={geometry}>
         <MeshTransmissionMaterial
           backside
-          samples={8}
+          samples={isMobile ? 3 : 8}
+          resolution={isMobile ? 256 : 512}
           thickness={2}
           roughness={isDark ? 0.08 : 0.12}
           transmission={1}
@@ -192,18 +208,9 @@ function OrbitingAccent({ isDark }: { isDark: boolean }) {
   );
 }
 
-function CameraRig() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+function CameraRig({ isMobile }: { isMobile: boolean }) {
   useFrame((state) => {
-    const baseZ = isMobile ? 16 : 12;
+    const baseZ = isMobile ? 18 : 12;
     state.camera.position.lerp(
       new THREE.Vector3(
         (state.pointer.x * 1.5),
@@ -218,6 +225,8 @@ function CameraRig() {
 }
 
 function Scene({ isDark }: { isDark: boolean }) {
+  const isMobile = useIsMobile();
+  
   return (
     <>
       <ambientLight intensity={isDark ? 0.5 : 0.8} />
@@ -232,18 +241,24 @@ function Scene({ isDark }: { isDark: boolean }) {
         color={isDark ? "#34D399" : "#059669"} 
       />
       <Environment preset={isDark ? "night" : "city"} />
-      <MorphingSculpture isDark={isDark} />
-      <FloatingParticles isDark={isDark} />
-      <OrbitingAccent isDark={isDark} />
-      <ContactShadows 
-        position={[0, -4, 0]} 
-        opacity={isDark ? 0.5 : 0.3} 
-        scale={16} 
-        blur={2.5} 
-        far={6} 
-        color={isDark ? "#000000" : "#1A1A1A"}
-      />
-      <CameraRig />
+      
+      <MorphingSculpture isDark={isDark} isMobile={isMobile} />
+      <FloatingParticles isDark={isDark} count={isMobile ? 15 : 40} />
+      {/* Hide the orbiting accent on mobile to save performance */}
+      {!isMobile && <OrbitingAccent isDark={isDark} />}
+      
+      {/* ContactShadows is very expensive, disable on mobile */}
+      {!isMobile && (
+        <ContactShadows 
+          position={[0, -4, 0]} 
+          opacity={isDark ? 0.5 : 0.3} 
+          scale={16} 
+          blur={2.5} 
+          far={6} 
+          color={isDark ? "#000000" : "#1A1A1A"}
+        />
+      )}
+      <CameraRig isMobile={isMobile} />
     </>
   );
 }
@@ -257,7 +272,7 @@ export function Hero3D() {
       backgroundImage: "radial-gradient(circle at center, transparent 0%, var(--color-bg) 100%)"
     }}>
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={[1, 1.2]} // Capped max DPR to 1.2 for better mobile performance
         camera={{ position: [0, 0, 12], fov: 35 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         onCreated={() => setIsLoaded(true)}
