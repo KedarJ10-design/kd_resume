@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Section } from "../ui/Section";
 import { SpotlightCard } from "../ui/SpotlightCard";
 import { Badge } from "../ui/Badge";
-import { Ticker } from "../ui/Animations";
+
 import { resumeData } from "../../data/resume";
 import { Code, Brain, Globe, Sparkles } from "lucide-react";
 
@@ -57,24 +57,6 @@ export function About() {
             </div>
           </SpotlightCard>
         ))}
-      </motion.div>
-
-      {/* Currently exploring ticker */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="mt-20 pt-10 border-t border-border/40"
-      >
-        <div className="flex items-center gap-4 mb-6 justify-center">
-          <span className="w-1.5 h-1.5 rounded-full bg-warm inline-block" />
-          <span className="text-xs font-sans text-text-muted uppercase tracking-widest">Currently exploring</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-warm inline-block" />
-        </div>
-        <div className="py-4">
-          <Ticker items={resumeData.currentlyExploring} speed={30} />
-        </div>
       </motion.div>
     </Section>
   );

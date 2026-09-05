@@ -20,7 +20,7 @@ export function Contact() {
 
   const links = [
     { icon: Github, label: "GitHub", href: resumeData.github, value: "KedarJ10-design" },
-    { icon: Linkedin, label: "LinkedIn", href: resumeData.linkedin, value: "kedar-jadhav-190090317" },
+    { icon: Linkedin, label: "LinkedIn", href: resumeData.linkedin, value: "kedarjadhav10" },
     { icon: Mail, label: "Email", href: `mailto:${resumeData.email}`, value: resumeData.email },
     { icon: Phone, label: "Phone", href: `tel:${resumeData.phone}`, value: resumeData.phone },
   ];

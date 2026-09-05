@@ -148,8 +148,7 @@ export function Hero() {
             {resumeData.stats.map((stat, i) => (
               <div key={stat.label} className="group">
                 <div className="text-3xl md:text-4xl font-serif text-text mb-1 flex items-baseline">
-                  <AnimatedCounter value={stat.numericValue} duration={2 + i * 0.3} />
-                  <span className="text-secondary ml-0.5">+</span>
+                  <span>{stat.value}</span>
                 </div>
                 <div className="text-xs font-sans text-text-dim uppercase tracking-widest">{stat.label}</div>
               </div>

@@ -5,7 +5,7 @@ export const resumeData = {
   location: "Pune, India",
   email: "jadhavkedar55@gmail.com",
   phone: "+91-7020059280",
-  linkedin: "https://www.linkedin.com/in/kedar-jadhav-190090317/",
+  linkedin: "https://www.linkedin.com/in/kedarjadhav10",
   github: "https://github.com/KedarJ10-design",
   twitter: "",
   resumePdf: "/MARK_V_v2.pdf",
@@ -15,20 +15,10 @@ export const resumeData = {
   roles: ["Full Stack Developer", "AI Engineer", "3D Web Creator", "Freelance Developer"],
 
   stats: [
-    { label: "Projects Delivered", value: "5+", numericValue: 5 },
-    { label: "Users Impacted", value: "800+", numericValue: 800 },
+    { label: "Projects Delivered", value: "8", numericValue: 8 },
     { label: "Major Projects", value: "3", numericValue: 3 },
-    { label: "Years Experience", value: "2+", numericValue: 2 },
+    { label: "Years Experience", value: "2", numericValue: 2 },
   ],
-
-  currentlyExploring: [
-    "System Design Patterns",
-    "Advanced Three.js Shaders",
-    "LLM Fine-tuning",
-    "Kubernetes & DevOps",
-    "Rust for WebAssembly",
-  ],
-
   experience: [
     {
       role: "Freelance Web Developer",
@@ -37,7 +27,6 @@ export const resumeData = {
       period: "Mar 2025 – Present",
       highlights: [
         "Delivered 5 client websites end-to-end: 3 business websites with HTML, CSS, React and 2 immersive 3D web platforms with MERN, WebGL, Three.js, Spline 3D",
-        "Tracked performance via Google Analytics, achieving 35% increase in average user engagement across delivered sites",
       ],
       technologies: ["React", "MERN", "WebGL", "Three.js", "Spline 3D", "Google Analytics"],
     },
@@ -49,7 +38,6 @@ export const resumeData = {
       highlights: [
         "Contributed to a self-paced employee training platform on Moodle LMS, customized with HTML, CSS, and JavaScript, replacing a costly third-party tool",
         "Built the certificate generation module and employee ID management system, alongside platform features supporting lectures, quizzes, and assessments",
-        "Drove adoption to ~70% of the company (~800 employees), enabling staff to upskill and earn certificates and badges",
         "Integrated Antigravity, Gemini CLI, and Claude Code into daily development workflow to accelerate coding and debugging cycles",
       ],
       technologies: ["Moodle", "HTML", "CSS", "JavaScript", "Antigravity", "Gemini CLI", "Claude Code"],
@@ -66,7 +54,7 @@ export const resumeData = {
         "Designed a 12-table relational data model supporting tourist profiles, local-guide bookings, vendor listings, and itinerary data",
         "Built initial web app with TypeScript and Firebase, then rebuilt backend with Supabase, React, and Node.js for improved scalability",
         "Integrated Gemini API for prompt-engineered AI itinerary planner, Razorpay for payments, Google Maps for SOS feature (live location sharing, emergency alerts, nearest-help lookup)",
-        "Extended to a 62MB Flutter mobile app with full feature parity, maintaining ~500ms average API response time",
+        "Extended the platform into a cross-platform Flutter mobile app (62MB) with full feature parity across web and mobile.",
         "Co-authored research paper accepted at DY Patil College Conference 2026",
       ],
       technologies: ["TypeScript", "React", "Node.js", "Supabase", "Firebase", "Flutter", "Gemini API", "Razorpay", "Google Maps", "Antigravity"],
@@ -173,7 +161,7 @@ export const resumeData = {
     { name: "English", level: "Fluent", proficiency: 90 },
     { name: "Hindi", level: "Native", proficiency: 100 },
     { name: "Marathi", level: "Native", proficiency: 100 },
-    { name: "German", level: "B1 – Intermediate", proficiency: 50 },
+    { name: "German", level: "A1 – Beginner", proficiency: 50 },
   ],
 
   writing: [

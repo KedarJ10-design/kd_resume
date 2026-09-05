@@ -82,7 +82,7 @@ export default function RootLayout({
               url: "https://kedarjadhav.dev",
               jobTitle: "Full Stack Developer",
               sameAs: [
-                "https://www.linkedin.com/in/kedar-jadhav-190090317/",
+                "https://www.linkedin.com/in/kedarjadhav10",
                 "https://github.com/KedarJ10-design",
               ],
               knowsAbout: ["Full Stack Development", "AI Engineering", "3D Web", "React", "Node.js", "Three.js"],
