@@ -139,7 +139,7 @@ export const resumeData = {
       degree: "Bachelor of Engineering in Computer Science",
       institution: "Anantrao Pawar College of Engineering and Research",
       location: "Pune, India",
-      period: "Expected 2026",
+      period: "2026",
       gpa: "7.31/10 CGPA",
       gpaValue: 7.31,
       gpaMax: 10,
