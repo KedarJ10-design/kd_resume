@@ -8,7 +8,7 @@ export const resumeData = {
   linkedin: "https://www.linkedin.com/in/kedarjadhav10",
   github: "https://github.com/KedarJ10-design",
   twitter: "",
-  resumePdf: "/MARK_V_v2.pdf",
+  resumePdf: "/mark_VI_v2.pdf",
 
   summary: "Full Stack Developer with a track record of shipping scalable applications. Developed a multi-platform AI travel application and enterprise backend modules, leveraging relational data modeling and REST APIs.",
 
