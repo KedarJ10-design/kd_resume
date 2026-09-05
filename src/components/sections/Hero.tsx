@@ -134,7 +134,7 @@ export function Hero() {
               }}
             >
               <Download size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
-              Download Résumé
+              Download Resume
             </Button>
           </motion.div>
 
