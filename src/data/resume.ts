@@ -10,7 +10,7 @@ export const resumeData = {
   twitter: "",
   resumePdf: "/MARK_V_v2.pdf",
 
-  summary: "Full Stack Developer with a track record of shipping scalable applications. Developed a multi-platform AI travel application and enterprise backend modules serving 800+ users, leveraging relational data modeling and REST APIs.",
+  summary: "Full Stack Developer with a track record of shipping scalable applications. Developed a multi-platform AI travel application and enterprise backend modules, leveraging relational data modeling and REST APIs.",
 
   roles: ["Full Stack Developer", "AI Engineer", "3D Web Creator", "Freelance Developer"],
 
@@ -139,7 +139,7 @@ export const resumeData = {
       degree: "Bachelor of Engineering in Computer Science",
       institution: "Anantrao Pawar College of Engineering and Research",
       location: "Pune, India",
-      period: "2026",
+      period: "Expected 2026",
       gpa: "7.31/10 CGPA",
       gpaValue: 7.31,
       gpaMax: 10,
